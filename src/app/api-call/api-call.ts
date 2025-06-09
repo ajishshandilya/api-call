@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ApiCallService } from '../api-call-service';
+import { User } from '../User-model';
 
 @Component({
   selector: 'app-api-call',
@@ -9,12 +10,12 @@ import { ApiCallService } from '../api-call-service';
   styleUrl: './api-call.scss'
 })
 export class ApiCall {
-  apiCall: string = 'https://jsonplaceholder.typicode.com/users';
-
   constructor(private apiCallService: ApiCallService) {}
+
+  users: User[] = [];
   ngOnInit() {
-    this.apiCallService.getData().subscribe((data: any)=>{
-      console.log(data);
+    this.apiCallService.getData().subscribe((data: User[])=>{
+      this.users = data;
     });
   }
 }
